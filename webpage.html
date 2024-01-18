@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Views</title>
+</head>
+
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        main {
+            flex: 1;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #youtubePlayers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        iframe {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            iframe {
+                width: 100%;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            margin-top: auto;
+        }
+
+        .animated-text {
+            animation: textAnimation 3s infinite alternate;
+
+            .social-links {
+                text-align: center;
+            }
+
+            .social-links a {
+                display: inline-block;
+                margin: 10px;
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            .social-links a:hover {
+                background-color: #555;
+            }
+        }
+
+        .social-links {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .social-links a:hover {
+            background-color: #555;
+        }
+
+        .youtube-link {
+            background-color: #c4302b;
+        }
+
+        .instagram-link {
+            background-color: #e4405f;
+        }
+
+        @keyframes textAnimation {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.05);
+                opacity: 0.7;
+            }
+        }
+    </style>
+    <header>
+        <h1><b>Free Yotube Views</b></h1>
+        <h3 style="padding-top: 50px;">Hello there! I'm BlackBuds. Need to boost your channel's watch time? Find me on
+            Instagram for expert assistance. Let's connect and supercharge your channel's success!</h3>
+        <section>
+            <div class="social-links">
+                <!-- <a class="youtube-link" href="https://www.youtube.com/your-channel" target="_blank">YouTube</a> -->
+                <a class="instagram-link" href="https://www.instagram.com/your-profile" target="_blank">Instagram</a>
+            </div>
+        </section>
+
+    </header>
+
+    <main>
+        <section>
+            <h2>Input Fields</h2>
+            <label for="youtubeUrllabel">YouTube URL:</label>
+            <input type="text" id="youtubeUrl" required>
+            <br>
+            <label for="intNumberlabel">Views:</label>
+            <input type="number" id="intNumber" required>
+            <br>
+            <button onclick="generateIframes()">Generate Views</button>
+        </section>
+
+        <div id="iframeContainer">
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Black Buds</p>
+    </footer>
+
+    <script>
+
+        function generateIframes() {
+            const videoUrl = document.getElementById("youtubeUrl").value;
+            const intNumber = parseInt(document.getElementById("intNumber").value);
+
+            if (!videoUrl || isNaN(intNumber) || intNumber <= 0) {
+                alert("Please enter a valid YouTube URL and a positive number of iframes.");
+                return;
+            }
+
+            const iframeContainer = document.getElementById("iframeContainer");
+            iframeContainer.innerHTML = '';
+
+            for (let i = 0; i < intNumber; i++) {
+                const iframe = document.createElement("iframe");
+                iframe.width = "560";
+                iframe.height = "315";
+                iframe.src = `https://www.youtube.com/embed/${extractVideoId(videoUrl)}`;
+              //  alert(extractVideoId(videoUrl));
+                iframeContainer.appendChild(iframe);
+            }
+        }
+
+        function extractVideoId(url) {
+            const regex = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/)|youtu.be\/)([a-zA-Z0-9_-]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+    </script>
+</body>
+
+</html>
